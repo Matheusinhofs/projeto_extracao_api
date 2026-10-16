@@ -1,0 +1,4 @@
+Projeto de Extração de API:
+    - Para que serve um Data Warehouse?
+        - Permite que haja uma fonte única da verdade, evitando os silos de dados 
+        
