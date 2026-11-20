@@ -1,4 +1,12 @@
 Projeto de Extração de API:
     - Para que serve um Data Warehouse?
         - Permite que haja uma fonte única da verdade, evitando os silos de dados 
-        
+        - Consegue trazer recorrência para as análises
+        - Torna escalável 
+    - Projeto inclui a extração de duas APIs (yfinance e bitcoin), arquitetura medalhão, cálculo de KPIs 
+    - A API permite que sistemas se comuniquem através de requisições e respostas
+        - Retorna um JSON que traz o valor necessário 
+        - A biblioteca request do python faz essas requisições de APIs 
+        - Pelo request conseguimos buscar a informação da API com o método GET
+        - Isso retorna se a API conseguiu retorno (200 ou 404 ou algum outro) e com o json obtém-se o valor que a API entrega em cada campo
+    - No meu caso vou usar uma API de Countries para teste
