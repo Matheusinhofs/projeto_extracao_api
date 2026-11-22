@@ -3,37 +3,40 @@ import os
 from dotenv import load_dotenv
 import pandas as pd
 
-load_dotenv()
-api_key = os.getenv("API_KEY")
+def get_times_df() -> pd.DataFrame:
 
-url = "http://api.football-data.org/v4/competitions/PL"
-url_teste = "http://api.football-data.org/v4/competitions/PL/teams"
+    load_dotenv()
+    api_key = os.getenv("API_KEY")
 
-headers = {
-    "X-Auth-Token": f"{api_key}"
-}
+    url = "http://api.football-data.org/v4/competitions/PL/teams"
 
-response = requests.get(url_teste,headers=headers)
-data = response.json()
+    headers = {
+        "X-Auth-Token": f"{api_key}"
+    }
 
-dados_tratados = []
+    response = requests.get(url,headers=headers)
+    data = response.json()
 
-for time in data['teams']:
-    nome = time['name']
-    nome_abreviado = time['shortName']
-    sigla = time['tla']
-    fundacao = time['founded']
-    cores = time['clubColors']
-    estadio = time['venue']
+    dados_tratados = []
 
-    dados_tratados.append({
-        'Nome': nome,
-        'Nome Abreviado': nome_abreviado,
-        'Sigla': sigla,
-        'Fundação': fundacao,
-        'Cores': cores,
-        'Estádio': estadio
-    })
+    for time in data['teams']:
+        id = time['id']
+        nome = time['name']
+        nome_abreviado = time['shortName']
+        sigla = time['tla']
+        fundacao = time['founded']
+        cores = time['clubColors']
+        estadio = time['venue']
 
-df = pd.DataFrame(dados_tratados)
-print(df)
+        dados_tratados.append({
+            'id': id,
+            'Nome': nome,
+            'Nome Abreviado': nome_abreviado,
+            'Sigla': sigla,
+            'Fundação': fundacao,
+            'Cores': cores,
+            'Estádio': estadio
+        })
+
+    df = pd.DataFrame(dados_tratados)
+    return df
